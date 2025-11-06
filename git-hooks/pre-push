@@ -51,9 +51,9 @@ while read -r local_ref local_sha _ remote_sha; do
             echo "❌ Commit $commit message contains uppercase: $first_line"
             exit 1
         fi
-        if ! echo "$first_line" | grep -qE '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\[.+\])?: .+'; then
+        if ! echo "$first_line" | grep -qE '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\[.+?\]|\(.+?\))?: .+'; then
             echo "❌ Commit $commit has invalid message format: $first_line"
-            echo "   Please use: type[scope]: description (lowercase, ≤40 chars)"
+            echo "   Please use: type[scope] or type(scope): description (lowercase, ≤40 chars)"
             exit 1
         fi
 
