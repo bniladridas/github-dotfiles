@@ -8,12 +8,14 @@ set -e
 echo "Setting up Zsh prompt..."
 touch ~/.zshrc
 echo 'PS1="$ "' >> ~/.zshrc
+# shellcheck disable=SC1090
 source ~/.zshrc
 
 echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "Configuring Homebrew in Zsh..."
+# shellcheck disable=SC2016
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 

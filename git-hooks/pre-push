@@ -8,7 +8,9 @@
 
 set -e
 
+# shellcheck disable=SC2034
 remote_name=$1
+# shellcheck disable=SC2034
 url=$2
 
 # --- 1. Run pre-commit checks
@@ -22,23 +24,23 @@ pre-commit run --all-files || exit 1
 # --- 2. YAML checking is handled by pre-commit check-yaml
 
 # --- 3. Validate each ref being pushed
-while read local_ref local_sha remote_ref remote_sha; do
+while read -r local_ref local_sha _ remote_sha; do
     if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
         continue
     fi
 
     if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
-        commits=$(git rev-list $local_sha --not --all)
+        commits=$(git rev-list "$local_sha" --not --all)
     else
-        commits=$(git rev-list $local_sha --not $remote_sha)
+        commits=$(git rev-list "$local_sha" --not "$remote_sha")
     fi
 
     echo "🔎 Checking commits for $local_ref..."
     for commit in $commits; do
-        msg=$(git log --format=%B -n 1 $commit)
+        msg=$(git log --format=%B -n 1 "$commit")
         first_line=$(echo "$msg" | head -1)
-        author_name=$(git log -1 --format='%an' $commit)
-        author_email=$(git log -1 --format='%ae' $commit)
+        author_name=$(git log -1 --format='%an' "$commit")
+        author_email=$(git log -1 --format='%ae' "$commit")
 
         # Validate commit message
         if [ ${#first_line} -gt 40 ]; then
