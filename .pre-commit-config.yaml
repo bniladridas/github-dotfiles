@@ -32,6 +32,10 @@ repos:
   - id: fmt
   - id: clippy
   - id: check
+- repo: https://github.com/pre-commit/mirrors-prettier
+  rev: v3.0.0
+  hooks:
+  - id: prettier
 - repo: https://github.com/pre-commit/mirrors-mypy
   rev: v1.0.0
   hooks:
