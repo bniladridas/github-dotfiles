@@ -54,12 +54,10 @@ To set up the Git hooks:
    pre-commit install  # In each project repo
    ```
 
-   - **yamllint**: `pip install yamllint` or `brew install yamllint`
-
 ## Features
 
-- **Pre-commit checks**: Runs pre-commit hooks if available (includes Python linting with black/flake8/pylint/mypy, C++ formatting/linting with clang-format and clang-tidy, Rust formatting/linting/compilation with rustfmt/clippy/cargo-check, JS/TS formatting with prettier, and general checks).
-- **YAML linting**: Runs yamllint on YAML files if available.
+- **Pre-commit checks**: Runs pre-commit hooks if available (includes Python linting with black/flake8/mypy, C++ formatting/linting with clang-format and clang-tidy, Rust formatting/linting/compilation with rustfmt/clippy, and general checks).
+- **YAML linting**: Runs check-yaml from pre-commit.
 - **Commit message validation**: Ensures messages follow conventional commit format (lowercase, ≤40 chars, proper type).
 - **Author identity verification**: Checks that commits are authored by "Niladri Das" with email "bniladridas@users.noreply.github.com".
 
@@ -67,7 +65,7 @@ To set up the Git hooks:
 
 When the hook fails, it will block the push with an error message. Common issues:
 
-- Pre-commit or yamllint not installed: Install with `pip install pre-commit yamllint`
+- Pre-commit not installed: Install with `pip install pre-commit`
 - Commit message format invalid: Use `type(scope): description` (lowercase, ≤40 chars)
 - Author identity mismatch: Ensure Git config matches the expected values
 
