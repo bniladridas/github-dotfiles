@@ -42,4 +42,7 @@ brew install node
 echo "Installing GitHub CLI..."
 brew install gh
 
+echo "Installing Docker CLI..."
+brew install docker
+
 echo "Setup complete! Please restart your terminal or run 'source ~/.zprofile' to apply changes."
