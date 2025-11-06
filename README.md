@@ -11,7 +11,23 @@ This repository contains global Git hooks for maintaining consistent commit stan
 
 ## Setup
 
-To set up these hooks on a new machine:
+### Initial Mac Setup
+
+For a new Mac, first run the setup script to install Zsh, Homebrew, and opencode:
+
+1. Open Terminal and run:
+
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bniladridas/GitHub-dotfiles/main/setup-mac.sh)"
+   ```
+
+   Or download and run the script manually.
+
+2. Restart your terminal or run `source ~/.zprofile` to apply changes.
+
+### Git Hooks Setup
+
+To set up the Git hooks:
 
 1. Clone this repository to your home directory:
 
