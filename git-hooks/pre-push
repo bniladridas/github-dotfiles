@@ -41,20 +41,19 @@ while read local_ref local_sha remote_ref remote_sha; do
         author_email=$(git log -1 --format='%ae' $commit)
 
         # Validate commit message
-        # Temporarily disabled
-        # if [ ${#first_line} -gt 40 ]; then
-        #     echo "❌ Commit $commit message too long: ${#first_line} chars (max 40)"
-        #     exit 1
-        # fi
-        # if echo "$first_line" | grep -q '[A-Z]'; then
-        #     echo "❌ Commit $commit message contains uppercase: $first_line"
-        #     exit 1
-        # fi
-        # if ! echo "$first_line" | grep -qE '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\[.+\])?: .+'; then
-        #     echo "❌ Commit $commit has invalid message format: $first_line"
-        #     echo "   Please use: type[scope]: description (lowercase, ≤40 chars)"
-        #     exit 1
-        # fi
+        if [ ${#first_line} -gt 40 ]; then
+            echo "❌ Commit $commit message too long: ${#first_line} chars (max 40)"
+            exit 1
+        fi
+        if echo "$first_line" | grep -q '[A-Z]'; then
+            echo "❌ Commit $commit message contains uppercase: $first_line"
+            exit 1
+        fi
+        if ! echo "$first_line" | grep -qE '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\[.+\])?: .+'; then
+            echo "❌ Commit $commit has invalid message format: $first_line"
+            echo "   Please use: type[scope]: description (lowercase, ≤40 chars)"
+            exit 1
+        fi
 
         # Validate author identity
         if [ "$author_name" != "Niladri Das" ]; then
