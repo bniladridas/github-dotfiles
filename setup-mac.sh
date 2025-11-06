@@ -31,6 +31,9 @@ echo "Current shell: $SHELL"
 echo "Installing opencode..."
 brew install opencode
 
+echo "Installing Python..."
+brew install python
+
 echo "Installing GitHub CLI..."
 brew install gh
 
