@@ -34,6 +34,9 @@ brew install opencode
 echo "Installing Python..."
 brew install python
 
+echo "Installing Node.js and npm..."
+brew install node
+
 echo "Installing GitHub CLI..."
 brew install gh
 
