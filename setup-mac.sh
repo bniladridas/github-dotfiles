@@ -48,4 +48,12 @@ brew install gh
 echo "Installing Docker CLI..."
 brew install docker
 
+echo "Setting up Git config..."
+if [ -f ~/GitHub-dotfiles/.gitconfig ]; then
+  cp ~/GitHub-dotfiles/.gitconfig ~/.gitconfig
+  echo "Git aliases configured."
+else
+  echo "Git config file not found; clone the repo first."
+fi
+
 echo "Setup complete! Please restart your terminal or run 'source ~/.zprofile' to apply changes."

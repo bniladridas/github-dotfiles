@@ -47,11 +47,7 @@ To set up the Git hooks:
    git config --global user.email "bniladridas@users.noreply.github.com"
    ```
 
-4. (Optional) Include useful Git aliases by copying `.gitconfig` to your home directory:
-
-   ```bash
-   cp ~/GitHub-dotfiles/.gitconfig ~/.gitconfig
-   ```
+4. The setup script automatically configures useful Git aliases from `.gitconfig`.
 
    Available aliases:
    - `git track <branch>`: Set upstream to origin/<branch>
