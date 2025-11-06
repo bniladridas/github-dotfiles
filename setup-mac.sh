@@ -49,10 +49,15 @@ echo "Installing Docker CLI..."
 brew install docker
 
 echo "Setting up Docker Hub..."
-read -r -p "Enter Docker Hub token for user 'harpertoken' (or press enter to skip): " docker_token
-if [ -n "$docker_token" ]; then
-  echo "$docker_token" | docker login -u harpertoken --password-stdin
-  echo "Logged in to Docker Hub as harpertoken."
+read -r -p "Do you want to log in to Docker Hub as 'harpertoken'? (y/N): " login_choice
+if [[ "$login_choice" =~ ^[Yy]$ ]]; then
+  read -r -p "Enter Docker Hub token: " docker_token
+  if [ -n "$docker_token" ]; then
+    echo "$docker_token" | docker login -u harpertoken --password-stdin
+    echo "Logged in to Docker Hub as harpertoken."
+  else
+    echo "No token provided, skipped."
+  fi
 else
   echo "Skipped Docker Hub login."
 fi
