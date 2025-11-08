@@ -42,8 +42,18 @@ brew install node
 echo "Installing Ruby..."
 brew install ruby
 
+echo "Installing Rust..."
+brew install rust
+
 echo "Installing GitHub CLI..."
 brew install gh
+
+echo "Installing pipx..."
+brew install pipx
+
+echo "Installing pre-commit..."
+export PATH="$HOME/.local/bin:$PATH"
+pipx install pre-commit
 
 echo "Installing Docker CLI..."
 brew install docker
