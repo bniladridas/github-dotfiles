@@ -48,6 +48,9 @@ brew install rust
 echo "Installing GitHub CLI..."
 brew install gh
 
+echo "Installing GitLab CLI..."
+brew install glab
+
 echo "Installing pipx..."
 brew install pipx
 
