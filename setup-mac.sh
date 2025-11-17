@@ -45,6 +45,9 @@ brew install ruby
 echo "Installing Rust..."
 brew install rust
 
+echo "Installing LLVM..."
+brew install llvm
+
 echo "Installing GitHub CLI..."
 brew install gh
 
@@ -85,6 +88,10 @@ if [ -f ~/GitHub-dotfiles/.gitconfig ]; then
 else
   echo "Git config file not found; clone the repo first."
 fi
+
+echo "Setting up Git hooks..."
+git config --global core.hooksPath ~/GitHub-dotfiles/git-hooks
+chmod +x ~/GitHub-dotfiles/git-hooks/*
 
 echo "Configuring commit message scope brackets..."
 read -r -p "Choose bracket type for commit scopes (1 for [], 2 for ()): " bracket_choice
