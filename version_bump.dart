@@ -41,5 +41,16 @@ void main(List<String> args) {
   final newVersion = '$major.$minor.$patch';
   versionFile.writeAsStringSync('$newVersion\n');
 
+  // Update pubspec.yaml if it exists
+  final pubspecFile = File('pubspec.yaml');
+  if (pubspecFile.existsSync()) {
+    final content = pubspecFile.readAsStringSync();
+    final updatedContent = content.replaceFirst(
+      RegExp(r'version: \d+\.\d+\.\d+'),
+      'version: $newVersion'
+    );
+    pubspecFile.writeAsStringSync(updatedContent);
+  }
+
   print('Version bumped from $currentVersion to $newVersion ($bumpType)');
 }
