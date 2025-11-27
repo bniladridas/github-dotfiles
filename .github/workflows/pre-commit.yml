@@ -38,7 +38,10 @@ jobs:
       run: pre-commit run --all-files --show-diff-on-failure
     - name: Install actionlint
       run: |
-        curl -s https://api.github.com/repos/rhysd/actionlint/releases/latest | grep "browser_download_url.*linux_amd64.tar.gz" | cut -d '"' -f 4 | xargs curl -L -o actionlint.tar.gz
+        curl -s https://api.github.com/repos/rhysd/actionlint/releases/latest \
+          | grep "browser_download_url.*linux_amd64.tar.gz" \
+          | cut -d '"' -f 4 \
+          | xargs curl -L -o actionlint.tar.gz
         tar -xzf actionlint.tar.gz
         sudo mv actionlint /usr/local/bin/
     - name: Run actionlint
