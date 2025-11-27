@@ -1,11 +1,12 @@
+---
 name: github_dotfiles
-description: A comprehensive dotfiles repository with global Git hooks, Mac setup automation, security scanning, and version management for consistent development environments.
+description: Comprehensive dotfiles with Git hooks, Mac setup, security scanning, and version management.
 version: 1.0.0
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  # No dependencies needed for simple scripts
+# No dependencies needed for simple scripts
 
 dev_dependencies:
-  # Add dev dependencies if needed for testing
+# Add dev dependencies if needed for testing

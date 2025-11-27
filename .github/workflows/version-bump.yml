@@ -1,6 +1,9 @@
+---
 name: Version Bump
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       bump_type:
@@ -23,13 +26,38 @@ jobs:
     - uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
     - uses: dart-lang/setup-dart@v1
+    - name: Determine bump type
+      id: bump
+      run: |
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          echo "bump_type=${{ inputs.bump_type }}" >> $GITHUB_OUTPUT
+        else
+          COMMIT_MSG="$(git log --format=%B -n 1)"
+          FIRST_LINE="$(head -1 <<< "$COMMIT_MSG")"
+          BODY="$(tail -n +2 <<< "$COMMIT_MSG")"
+          if grep -q '^feat' <<< "$FIRST_LINE"; then
+            TYPE="minor"
+          elif grep -q '^fix' <<< "$FIRST_LINE"; then
+            TYPE="patch"
+          else
+            TYPE=""
+          fi
+          if grep -q 'BREAKING CHANGE' <<< "$BODY"; then
+            TYPE="major"
+          fi
+          echo "bump_type=\"$TYPE\"" >> "$GITHUB_OUTPUT"
+        fi
     - name: Bump version
-      run: dart run version_bump.dart
+      if: steps.bump.outputs.bump_type != ''
+      run: dart run version_bump.dart ${{ steps.bump.outputs.bump_type }}
     - name: Commit and push
+      if: steps.bump.outputs.bump_type != ''
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add VERSION
-        git commit -m "chore: bump version to $(cat VERSION)"
+        VERSION=$(cat VERSION)
+        git commit -m "chore: bump version to $VERSION"
         git push
