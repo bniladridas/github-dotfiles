@@ -44,6 +44,9 @@ brew install node
 echo "Installing Ruby..."
 brew install ruby
 
+echo "Installing Cocoapods..."
+brew install cocoapods
+
 echo "Installing Rust..."
 brew install rust
 
