@@ -45,7 +45,7 @@ This script pulls the latest changes and copies `.gitconfig`, `.pre-commit-confi
 
 ### Initial Mac Setup
 
-For a new Mac, run the setup script to install Zsh, Homebrew, Python, Node.js, Ruby, Rust, Go, Flutter, LLVM, GitHub CLI, GitLab CLI, actionlint, yamllint, Docker CLI, QEMU, opencode, and configure Git hooks globally. It also offers to log in to Docker Hub as 'harpertoken':
+For a new Mac, run the setup script to install Zsh, Homebrew, Python, Node.js, Ruby, Cocoapods, Rust, Go, Flutter, LLVM, GitHub CLI, GitLab CLI, actionlint, yamllint, Docker CLI, QEMU, opencode, and configure Git hooks globally. It also offers to log in to Docker Hub as 'harpertoken':
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bniladridas/github-dotfiles/main/setup-mac.sh)"
