@@ -1,8 +1,6 @@
 use clap::{Parser, Subcommand};
-use reqwest;
 use scraper::{Html, Selector};
 use std::process::Command;
-use tokio;
 
 #[derive(Parser)]
 #[command(name = "ollama-tool")]
@@ -35,12 +33,12 @@ async fn fetch_models() -> Result<Vec<String>, Box<dyn std::error::Error>> {
 
     let mut models = Vec::new();
     for element in document.select(&selector) {
-        if let Some(href) = element.value().attr("href") {
-            if let Some(name) = href.strip_prefix("/library/") {
-                if !name.contains('/') && !models.contains(&name.to_string()) {
-                    models.push(name.to_string());
-                }
-            }
+        if let Some(href) = element.value().attr("href")
+            && let Some(name) = href.strip_prefix("/library/")
+            && !name.contains('/')
+            && !models.contains(&name.to_string())
+        {
+            models.push(name.to_string());
         }
     }
     models.sort();
@@ -48,13 +46,15 @@ async fn fetch_models() -> Result<Vec<String>, Box<dyn std::error::Error>> {
 }
 
 fn run_ollama_command(args: &[&str]) -> Result<(), Box<dyn std::error::Error>> {
-    let status = Command::new("ollama")
-        .args(args)
-        .status()?;
+    let status = Command::new("ollama").args(args).status()?;
     if status.success() {
         Ok(())
     } else {
-        Err(format!("Ollama command failed with exit code {}", status.code().unwrap_or(-1)).into())
+        Err(format!(
+            "Ollama command failed with exit code {}",
+            status.code().unwrap_or(-1)
+        )
+        .into())
     }
 }
 
