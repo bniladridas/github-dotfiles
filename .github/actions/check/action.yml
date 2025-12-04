@@ -13,17 +13,21 @@ runs:
   using: 'composite'
   steps:
     - name: format
-      run: cd ${{ inputs.working-directory }} && cargo fmt --check
+      working-directory: ${{ inputs.working-directory }}
+      run: cargo fmt --check
       shell: bash
 
     - name: lint
-      run: cd ${{ inputs.working-directory }} && cargo clippy -- -D warnings
+      working-directory: ${{ inputs.working-directory }}
+      run: cargo clippy -- -D warnings
       shell: bash
 
     - name: build
-      run: cd ${{ inputs.working-directory }} && cargo build --release
+      working-directory: ${{ inputs.working-directory }}
+      run: cargo build --release
       shell: bash
 
     - name: test
-      run: cd ${{ inputs.working-directory }} && cargo test
+      working-directory: ${{ inputs.working-directory }}
+      run: cargo test
       shell: bash
