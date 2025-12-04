@@ -10,7 +10,7 @@ on:
       - 'ollama/**'
       - '.github/workflows/ollama.yml'
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'ollama/**'
       - '.github/workflows/ollama.yml'
