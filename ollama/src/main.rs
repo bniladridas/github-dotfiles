@@ -1,7 +1,9 @@
 mod cli;
 mod models;
 mod ollama;
+mod prompts;
 
+use crate::prompts::DEFAULT_SYSTEM_PROMPT;
 use clap::Parser;
 use cli::{Cli, Commands};
 use models::fetch_models;
@@ -31,7 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         Commands::Run { model, system } => {
             println!("Running model: {}", model);
-            let system_prompt = system.unwrap_or_else(|| "You are GitHub Dotfiles AI, a helpful, harmless, and honest AI assistant powered by Ollama. Always provide accurate and useful responses.".to_string());
+            let system_prompt = system.unwrap_or_else(|| DEFAULT_SYSTEM_PROMPT.to_string());
             run_ollama_command(&["run", &model, "--system", &system_prompt])?;
         }
         Commands::Remove { model } => {
@@ -49,8 +51,9 @@ mod tests {
     #[test]
     fn test_default_system_prompt() {
         // Test that default prompt is used when None
-        let prompt = None::<String>.unwrap_or_else(|| "default".to_string());
-        assert_eq!(prompt, "default");
+        let prompt =
+            None::<String>.unwrap_or_else(|| crate::prompts::DEFAULT_SYSTEM_PROMPT.to_string());
+        assert_eq!(prompt, crate::prompts::DEFAULT_SYSTEM_PROMPT);
     }
 
     #[test]
