@@ -19,7 +19,12 @@ fi
 if ! pgrep -x "ollama" > /dev/null; then
     echo "Starting Ollama..."
     brew services start ollama
-    sleep 5  # Wait for Ollama to start
+    # Wait for Ollama service to be ready
+    echo "Waiting for Ollama to start..."
+    while ! curl -s http://localhost:11434/api/version > /dev/null; do
+        sleep 1
+    done
+    echo "Ollama is ready."
 fi
 
 # Build the tool
