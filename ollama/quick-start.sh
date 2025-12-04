@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# SPDX-License-Identifier: MIT
+
 # Quick start script for Ollama tool
 # Installs, builds, pulls lightest model, and runs it
 

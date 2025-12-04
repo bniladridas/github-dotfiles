@@ -1,16 +1,19 @@
+---
+# SPDX-License-Identifier: MIT
+
 name: ci
 
 on:
   push:
-    branches: [ main, add-ollama-tool ]
+    branches: [main, add-ollama-tool]
     paths:
       - 'ollama/**'
-       - '.github/workflows/ollama.yml'
+      - '.github/workflows/ollama.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'ollama/**'
-       - '.github/workflows/ollama.yml'
+      - '.github/workflows/ollama.yml'
 
 jobs:
   ci:

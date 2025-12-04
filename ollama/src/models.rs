@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 use scraper::{Html, Selector};
 
 pub async fn fetch_models() -> Result<Vec<String>, Box<dyn std::error::Error>> {

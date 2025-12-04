@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 mod cli;
 mod models;
 mod ollama;
