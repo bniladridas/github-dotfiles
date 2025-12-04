@@ -50,6 +50,12 @@ pub enum Error {
 }
 
 /// Main entry point for the Ollama CLI tool.
+///
+/// Parses command-line arguments and executes the corresponding subcommand.
+///
+/// # Errors
+///
+/// Returns an `Error` if any of the subcommands fail during execution.
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     let cli = Cli::parse();
