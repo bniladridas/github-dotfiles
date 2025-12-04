@@ -13,7 +13,7 @@ Clone the repository and build the tool:
 
 ```bash
 git clone https://github.com/bniladridas/github-dotfiles.git
-cd github-dotfiles/ollama-tool
+cd github-dotfiles/ollama
 cargo build --release
 ```
 
@@ -84,7 +84,7 @@ MODEL="llama2"
 
 ## Example Workflow
 
-1. List models: `./target/release/ollama-tool list`
+1. List models: `./target/release/github-dotfiles-ollama list`
 2. Choose a model (e.g., `llama2`)
-3. Pull it: `./target/release/ollama-tool pull llama2`
-4. Run it: `./target/release/ollama-tool run llama2`
+3. Pull it: `./target/release/github-dotfiles-ollama pull llama2`
+4. Run it: `./target/release/github-dotfiles-ollama run llama2`
