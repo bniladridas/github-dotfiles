@@ -19,22 +19,24 @@ cargo build --release
 
 ## Usage
 
-The full API of this tool can be found below.
+Use the provided script to automatically build and run the tool.
 
 <!-- prettier-ignore -->
 ```bash
 # Show help
-./target/release/ollama-tool --help
+./run.sh --help
 
 # List all available models from Ollama's library
-./target/release/ollama-tool list
+./run.sh list
 
 # Download a model (e.g., tinyllama)
-./target/release/ollama-tool pull tinyllama
+./run.sh pull tinyllama
 
 # Run a downloaded model interactively
-./target/release/ollama-tool run tinyllama
+./run.sh run tinyllama
 ```
+
+The script builds the tool if needed and passes arguments to it.
 
 ### Commands
 
