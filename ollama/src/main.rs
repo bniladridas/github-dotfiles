@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
 
+/// # Ollama Tool
+///
+/// A command-line tool for managing Ollama models.
 mod cli;
 mod models;
 mod ollama;
@@ -28,14 +31,19 @@ struct GenerateResponse {
     response: String,
 }
 
+/// Application error types.
 #[derive(Debug, Error)]
 pub enum Error {
+    /// HTTP request failed.
     #[error("HTTP request failed: {0}")]
     Reqwest(#[from] reqwest::Error),
+    /// IO error.
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
+    /// JSON parsing error.
     #[error("JSON parsing error: {0}")]
     Serde(#[from] serde_json::Error),
+    /// Ollama command failed.
     #[error("Ollama command failed: {0}")]
     Command(String),
 }
