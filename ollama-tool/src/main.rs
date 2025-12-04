@@ -22,6 +22,8 @@ enum Commands {
     Pull { model: String },
     /// Run a model
     Run { model: String },
+    /// Remove a model
+    Remove { model: String },
 }
 
 async fn fetch_models() -> Result<Vec<String>, Box<dyn std::error::Error>> {
@@ -82,6 +84,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("Running model: {}", model);
             let system_prompt = "You are GitHub Dotfiles AI, a helpful, harmless, and honest AI assistant powered by Ollama. Always provide accurate and useful responses.";
             run_ollama_command(&["run", &model, "--system", system_prompt])?;
+        }
+        Commands::Remove { model } => {
+            println!("Removing model: {}", model);
+            run_ollama_command(&["rm", &model])?;
+            println!("Model {} removed.", model);
         }
     }
     Ok(())

@@ -44,6 +44,7 @@ The script builds the tool if needed and passes arguments to it.
 - `installed`: Lists locally installed models
 - `pull <model>`: Downloads the specified model using Ollama CLI
 - `run <model>`: Launches the model in interactive chat mode with a helpful system prompt
+- `remove <model>`: Removes the specified model from local storage
 
 ## Handling Errors
 
