@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+    branches: [ main, add-ollama-tool ]
+    paths:
+      - 'ollama/**'
+       - '.github/workflows/ollama.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'ollama/**'
+       - '.github/workflows/ollama.yml'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: rust
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: cache
+      uses: Swatinem/rust-cache@v2
+
+    - name: check
+      uses: ./.github/actions/check
+      with:
+        working-directory: ollama
