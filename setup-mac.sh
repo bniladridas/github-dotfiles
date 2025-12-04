@@ -7,6 +7,9 @@
 
 set -e
 
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 echo "Setting up Zsh prompt..."
 touch ~/.zshrc
 echo 'PS1="$ "' >> ~/.zshrc
@@ -109,16 +112,16 @@ else
 fi
 
 echo "Setting up Git config..."
-if [ -f ~/github-dotfiles/.gitconfig ]; then
-  cp ~/github-dotfiles/.gitconfig ~/.gitconfig
+if [ -f "$SCRIPT_DIR/.gitconfig" ]; then
+  cp "$SCRIPT_DIR/.gitconfig" ~/.gitconfig
   echo "Git aliases configured."
 else
   echo "Git config file not found; clone the repo first."
 fi
 
 echo "Setting up Git hooks..."
-git config --global core.hooksPath ~/github-dotfiles/git-hooks
-chmod +x ~/github-dotfiles/git-hooks/*
+git config --global core.hooksPath "$SCRIPT_DIR/git-hooks"
+chmod +x "$SCRIPT_DIR/git-hooks"/*
 
 echo "Verifying Git hooks setup..."
 git config --global core.hooksPath
@@ -136,7 +139,7 @@ else
 fi
 
 echo "Activating dotfiles CLI..."
-cd ~/github-dotfiles
+cd "$SCRIPT_DIR"
 dart pub global activate --source path .
 echo "export PATH=\"\$PATH:\$HOME/.pub-cache/bin\"" >> ~/.zshrc
 
