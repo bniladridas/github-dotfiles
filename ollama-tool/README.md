@@ -42,7 +42,7 @@ The script builds the tool if needed and passes arguments to it.
 
 - `list`: Fetches and displays available models from ollama.ai/library
 - `pull <model>`: Downloads the specified model using Ollama CLI
-- `run <model>`: Launches the model in interactive chat mode
+- `run <model>`: Launches the model in interactive chat mode with a helpful system prompt
 
 ## Handling Errors
 

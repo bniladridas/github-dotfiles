@@ -74,7 +74,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         Commands::Run { model } => {
             println!("Running model: {}", model);
-            run_ollama_command(&["run", &model])?;
+            let system_prompt = "You are a helpful, harmless, and honest AI assistant. Always provide accurate and useful responses.";
+            run_ollama_command(&["run", &model, "--system", system_prompt])?;
         }
     }
     Ok(())
