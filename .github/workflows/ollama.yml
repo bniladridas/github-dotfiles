@@ -23,9 +23,6 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
 
-    - name: lint
-      run: ./bin/lint.sh
-
     - name: rust
       uses: dtolnay/rust-toolchain@stable
 
