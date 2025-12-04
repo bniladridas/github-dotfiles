@@ -30,10 +30,17 @@ jobs:
     - uses: actions/setup-python@v6
       with:
         python-version: '3.12'
+    - uses: dart-lang/setup-dart@v1
     - name: Install dependencies
       uses: ./.github/actions/install-deps
     - name: Install pre-commit
       run: pip install pre-commit
+    - name: Install Dart dependencies
+      run: dart pub get
+    - name: Run Dart analyze
+      run: dart analyze
+    - name: Run Dart tests
+      run: dart test
     - name: Run pre-commit
       run: pre-commit run --all-files --show-diff-on-failure
     - name: Run actionlint
