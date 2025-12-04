@@ -11,6 +11,7 @@ use models::fetch_models;
 use ollama::run_ollama_command;
 use prompts::DEFAULT_SYSTEM_PROMPT;
 use serde::{Deserialize, Serialize};
+use thiserror::Error;
 
 const OLLAMA_API_BASE: &str = "http://localhost:11434";
 
@@ -27,8 +28,20 @@ struct GenerateResponse {
     response: String,
 }
 
+#[derive(Debug, Error)]
+pub enum Error {
+    #[error("HTTP request failed: {0}")]
+    Reqwest(#[from] reqwest::Error),
+    #[error("IO error: {0}")]
+    Io(#[from] std::io::Error),
+    #[error("JSON parsing error: {0}")]
+    Serde(#[from] serde_json::Error),
+    #[error("Ollama command failed: {0}")]
+    Command(String),
+}
+
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() -> Result<(), Error> {
     let cli = Cli::parse();
 
     match cli.command {
@@ -71,11 +84,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-async fn generate_response(
-    model: &str,
-    prompt: &str,
-    system: &str,
-) -> Result<(), Box<dyn std::error::Error>> {
+async fn generate_response(model: &str, prompt: &str, system: &str) -> Result<(), Error> {
     let client = reqwest::Client::new();
     let request = GenerateRequest {
         model: model.to_string(),
@@ -93,22 +102,4 @@ async fn generate_response(
     let result: GenerateResponse = response.json().await?;
     println!("{}", result.response);
     Ok(())
-}
-
-#[cfg(test)]
-mod tests {
-
-    #[test]
-    fn test_option_handling() {
-        // Test option handling
-        let value = Some("test".to_string());
-        assert_eq!(value, Some("test".to_string()));
-    }
-
-    #[test]
-    fn test_custom_system_prompt() {
-        // Test that custom prompt is used
-        let prompt = Some("custom".to_string()).unwrap_or_else(|| "default".to_string());
-        assert_eq!(prompt, "custom");
-    }
 }
