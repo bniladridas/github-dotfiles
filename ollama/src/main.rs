@@ -1,9 +1,7 @@
 mod cli;
 mod models;
 mod ollama;
-mod prompts;
 
-use crate::prompts::DEFAULT_SYSTEM_PROMPT;
 use clap::Parser;
 use cli::{Cli, Commands};
 use models::fetch_models;
@@ -31,10 +29,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             run_ollama_command(&["pull", &model])?;
             println!("Model {} pulled successfully.", model);
         }
-        Commands::Run { model, system } => {
+        Commands::Run { model } => {
             println!("Running model: {}", model);
-            let system_prompt = system.unwrap_or_else(|| DEFAULT_SYSTEM_PROMPT.to_string());
-            run_ollama_command(&["run", &model, "--system", &system_prompt])?;
+            run_ollama_command(&["run", &model])?;
         }
         Commands::Remove { model } => {
             println!("Removing model: {}", model);
@@ -49,11 +46,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 mod tests {
 
     #[test]
-    fn test_default_system_prompt() {
-        // Test that default prompt is used when None
-        let prompt =
-            None::<String>.unwrap_or_else(|| crate::prompts::DEFAULT_SYSTEM_PROMPT.to_string());
-        assert_eq!(prompt, crate::prompts::DEFAULT_SYSTEM_PROMPT);
+    fn test_option_handling() {
+        // Test option handling
+        let value = Some("test".to_string());
+        assert_eq!(value, Some("test".to_string()));
     }
 
     #[test]
