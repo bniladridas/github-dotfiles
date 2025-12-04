@@ -1,6 +1,6 @@
 # GitHub Dotfiles
 
-This repository provides a comprehensive toolkit for developers, including global Git hooks for consistent commit standards and author identity, automated Mac setup scripts with robust error handling and logging for essential development tools (Python, Node.js, Rust, Go, Flutter, etc.), security scanning bots (CodeQL and Trivy) for vulnerability detection, a Dart-based CLI with help and testing, and automated version bump system. It ensures secure, standardized, and efficient development workflows across projects.
+This repository provides a comprehensive toolkit for developers, including global Git hooks for consistent commit standards and author identity, automated Mac setup scripts with robust error handling and logging for essential development tools (Python, Node.js, Rust, Go, Flutter, Ollama, etc.), security scanning bots (CodeQL and Trivy) for vulnerability detection, a Dart-based CLI with help and testing, a Rust-based Ollama model manager, and automated version bump system. It ensures secure, standardized, and efficient development workflows across projects.
 
 ## Installation
 
@@ -33,6 +33,25 @@ dotfiles version   # Show version
 
 **Note**: The `export PATH` command temporarily adds Dart's global executables to your PATH. Add it to your shell config file (`.zshrc`, `.bashrc`, etc.) to make it permanent.
 
+### Ollama Tool
+
+Manage Ollama models with a Rust-based CLI tool. It fetches available models from the internet, allows downloading and running them.
+
+```bash
+# Build the tool
+cd ollama-tool
+cargo build --release
+
+# List available models
+./target/release/ollama-tool list
+
+# Pull a model (e.g., tinyllama)
+./target/release/ollama-tool pull tinyllama
+
+# Run a model
+./target/release/ollama-tool run tinyllama
+```
+
 ### Updating and Restoring Dotfiles
 
 To update the repository and restore the latest dotfiles to your home directory:
@@ -46,7 +65,7 @@ This script pulls the latest changes and copies `.gitconfig`, `.pre-commit-confi
 
 ### Initial Mac Setup
 
-For a new Mac, run the setup script to install actionlint, Cocoapods, Docker CLI, Flutter, GitHub CLI, GitLab CLI, Go, Homebrew, LLVM, Node.js, opencode, Python, QEMU, Ruby, Rust, yamllint, Zsh, and configure Git hooks globally. It also offers to log in to Docker Hub as 'harpertoken':
+For a new Mac, run the setup script to install actionlint, Cocoapods, Docker CLI, Flutter, GitHub CLI, GitLab CLI, Go, Homebrew, LLVM, Node.js, Ollama, opencode, Python, QEMU, Ruby, Rust, yamllint, Zsh, and configure Git hooks globally. It also offers to log in to Docker Hub as 'harpertoken':
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bniladridas/github-dotfiles/main/setup-mac.sh)"
@@ -111,6 +130,7 @@ The setup script automatically configures Git to use the hooks globally and make
 - **Commit message validation**: Commit-msg hook ensures messages start with conventional type and are lowercase ≤60 chars. Pre-push hook enforces stricter format with scope, ≤40 chars.
 - **Author identity verification**: Checks that commits are authored by "Niladri Das" with email "bniladridas@users.noreply.github.com".
 - **Automated vulnerability scanning**: CodeQL and Trivy bots scan every push and PR for security issues, ensuring robust protection.
+- **Ollama model management**: Rust tool for fetching, downloading, and running Ollama models from the internet.
 - **Testing**: Comprehensive unit tests for the Dart CLI, run automatically in CI.
 - **Version management**: Dart-powered version bump bot automates semantic versioning updates for the package.
 - **Automation workflows**: GitHub Actions for automated version bumps via PRs and release creation. See [automation documentation](./.github/workflows/automation/README.md).
