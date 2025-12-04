@@ -17,6 +17,16 @@ cd github-dotfiles/ollama
 cargo build --release
 ```
 
+### Quick Start
+
+For a one-click setup and run with the lightest model:
+
+```bash
+./quick-start.sh
+```
+
+This script checks Ollama, builds the tool, pulls `tinyllama`, and runs it.
+
 ## Usage
 
 Use the provided script to automatically build and run the tool.
