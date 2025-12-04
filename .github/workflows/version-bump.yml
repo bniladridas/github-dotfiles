@@ -72,8 +72,10 @@ jobs:
     - name: Bump version
       if: steps.bump.outputs.bump_type != ''
       run: dart run version_bump.dart ${{ steps.bump.outputs.bump_type }}
-    - name: Commit and push
+    - name: Create PR
       if: steps.bump.outputs.bump_type != ''
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'

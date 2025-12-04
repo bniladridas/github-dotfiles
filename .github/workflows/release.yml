@@ -43,11 +43,15 @@ jobs:
         fi
     - name: Create release
       if: steps.version_check.outputs.version_changed == 'true'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         VERSION=${{ steps.version_check.outputs.new_version }}
         gh release create "v$VERSION" --title "v$VERSION" --notes "Release $VERSION"
     - name: Update repo description
       if: steps.version_check.outputs.version_changed == 'true'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         VERSION=${{ steps.version_check.outputs.new_version }}
         gh repo edit --description "Dotfiles repository - Version $VERSION"
