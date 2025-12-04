@@ -1,11 +1,27 @@
 mod cli;
 mod models;
 mod ollama;
+mod prompts;
 
 use clap::Parser;
 use cli::{Cli, Commands};
 use models::fetch_models;
 use ollama::run_ollama_command;
+use prompts::DEFAULT_SYSTEM_PROMPT;
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize)]
+struct GenerateRequest {
+    model: String,
+    prompt: String,
+    system: String,
+    stream: bool,
+}
+
+#[derive(Deserialize)]
+struct GenerateResponse {
+    response: String,
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -38,7 +54,40 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             run_ollama_command(&["rm", &model])?;
             println!("Model {} removed.", model);
         }
+        Commands::Generate {
+            model,
+            prompt,
+            system,
+        } => {
+            println!("Generating response with model: {}", model);
+            let system_prompt = system.unwrap_or_else(|| DEFAULT_SYSTEM_PROMPT.to_string());
+            generate_response(&model, &prompt, &system_prompt).await?;
+        }
     }
+    Ok(())
+}
+
+async fn generate_response(
+    model: &str,
+    prompt: &str,
+    system: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let client = reqwest::Client::new();
+    let request = GenerateRequest {
+        model: model.to_string(),
+        prompt: prompt.to_string(),
+        system: system.to_string(),
+        stream: false,
+    };
+
+    let response = client
+        .post("http://localhost:11434/api/generate")
+        .json(&request)
+        .send()
+        .await?;
+
+    let result: GenerateResponse = response.json().await?;
+    println!("{}", result.response);
     Ok(())
 }
 

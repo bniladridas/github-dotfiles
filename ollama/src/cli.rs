@@ -20,4 +20,12 @@ pub enum Commands {
     Run { model: String },
     /// Remove a model
     Remove { model: String },
+    /// Generate response with custom prompt and system
+    Generate {
+        model: String,
+        prompt: String,
+        /// Custom system prompt
+        #[arg(long)]
+        system: Option<String>,
+    },
 }
