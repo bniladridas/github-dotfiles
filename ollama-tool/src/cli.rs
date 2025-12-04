@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
-#[command(name = "ollama-tool")]
+#[command(name = "github-dotfiles-ollama")]
 #[command(about = "A tool to manage Ollama models")]
 pub struct Cli {
     #[command(subcommand)]

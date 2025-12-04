@@ -24,16 +24,16 @@ Use the provided script to automatically build and run the tool.
 <!-- prettier-ignore -->
 ```bash
 # Show help
-./run.sh --help
+./target/release/github-dotfiles-ollama --help
 
 # List all available models from Ollama's library
-./run.sh list
+./target/release/github-dotfiles-ollama list
 
 # Download a model (e.g., tinyllama)
-./run.sh pull tinyllama
+./target/release/github-dotfiles-ollama pull tinyllama
 
 # Run a downloaded model interactively
-./run.sh run tinyllama
+./target/release/github-dotfiles-ollama run tinyllama
 ```
 
 The script builds the tool if needed and passes arguments to it.

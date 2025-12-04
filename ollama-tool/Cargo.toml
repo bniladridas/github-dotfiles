@@ -1,5 +1,5 @@
 [package]
-name = "ollama-tool"
+name = "github-dotfiles-ollama"
 version = "0.1.0"
 edition = "2024"
 

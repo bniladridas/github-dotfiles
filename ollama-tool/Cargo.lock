@@ -403,6 +403,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "github-dotfiles-ollama"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "reqwest",
+ "scraper",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
 name = "h2"
 version = "0.3.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -756,18 +768,6 @@ name = "new_debug_unreachable"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "650eef8c711430f1a879fdd01d4745a7deea475becfb90269c06775983bbf086"
-
-[[package]]
-name = "ollama-tool"
-version = "0.1.0"
-dependencies = [
- "clap",
- "reqwest",
- "scraper",
- "serde",
- "serde_json",
- "tokio",
-]
 
 [[package]]
 name = "once_cell"
