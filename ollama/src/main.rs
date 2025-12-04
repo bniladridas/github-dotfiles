@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: MIT
 
+//! # Ollama Tool
+//!
+//! A command-line tool for managing Ollama models.
+
 mod cli;
 mod models;
 mod ollama;
@@ -28,18 +32,30 @@ struct GenerateResponse {
     response: String,
 }
 
+/// Represents errors that can occur within the application.
 #[derive(Debug, Error)]
 pub enum Error {
+    /// An error from the `reqwest` crate during an HTTP request.
     #[error("HTTP request failed: {0}")]
     Reqwest(#[from] reqwest::Error),
+    /// An I/O error occurred.
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
+    /// An error occurred during JSON serialization or deserialization.
     #[error("JSON parsing error: {0}")]
     Serde(#[from] serde_json::Error),
+    /// An external `ollama` command returned a non-zero exit status.
     #[error("Ollama command failed: {0}")]
     Command(String),
 }
 
+/// Main entry point for the Ollama CLI tool.
+///
+/// Parses command-line arguments and executes the corresponding subcommand.
+///
+/// # Errors
+///
+/// Returns an `Error` if any of the subcommands fail during execution.
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     let cli = Cli::parse();

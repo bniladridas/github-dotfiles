@@ -38,7 +38,7 @@ repos:
     pass_filenames: false
   - id: clippy
     name: clippy
-    entry: cargo clippy --manifest-path ollama/Cargo.toml -- -D warnings
+    entry: cargo clippy --manifest-path ollama/Cargo.toml -- -D warnings -D missing_docs
     language: system
     pass_filenames: false
 - repo: https://github.com/pre-commit/mirrors-mypy

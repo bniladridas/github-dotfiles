@@ -13,7 +13,7 @@
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 
-name: pre-commit
+name: Pre-commit
 
 on:
   pull_request:

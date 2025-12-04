@@ -7,6 +7,11 @@ use crate::Error;
 
 const OLLAMA_LIBRARY_URL: &str = "https://ollama.ai/library";
 
+/// Fetches available models from the Ollama library website.
+///
+/// # Panics
+///
+/// Panics if the hardcoded model selector is invalid.
 pub async fn fetch_models() -> Result<Vec<String>, Error> {
     let url = OLLAMA_LIBRARY_URL;
     let response = reqwest::get(url).await?;
