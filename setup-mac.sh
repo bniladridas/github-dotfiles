@@ -66,6 +66,9 @@ fi
 echo "Installing opencode..."
 brew install opencode
 
+echo "Installing Ollama..."
+brew install ollama
+
 log "Installing Python..."
 if brew install python; then
   log "Python installed."
