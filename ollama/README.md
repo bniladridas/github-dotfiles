@@ -71,8 +71,8 @@ The tool can be integrated into automation scripts:
 ```bash
 #!/bin/bash
 MODEL="llama2"
-./target/release/ollama-tool pull $MODEL
-./target/release/ollama-tool run $MODEL
+./target/release/github-dotfiles-ollama pull $MODEL
+./target/release/github-dotfiles-ollama run $MODEL
 ```
 
 ## Features
