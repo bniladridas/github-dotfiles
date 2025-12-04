@@ -17,7 +17,12 @@ pub enum Commands {
     /// Pull a model
     Pull { model: String },
     /// Run a model
-    Run { model: String },
+    Run {
+        model: String,
+        /// Custom system prompt
+        #[arg(long)]
+        system: Option<String>,
+    },
     /// Remove a model
     Remove { model: String },
 }

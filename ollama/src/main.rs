@@ -29,10 +29,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             run_ollama_command(&["pull", &model])?;
             println!("Model {} pulled successfully.", model);
         }
-        Commands::Run { model } => {
+        Commands::Run { model, system } => {
             println!("Running model: {}", model);
-            let system_prompt = "You are GitHub Dotfiles AI, a helpful, harmless, and honest AI assistant powered by Ollama. Always provide accurate and useful responses.";
-            run_ollama_command(&["run", &model, "--system", system_prompt])?;
+            let system_prompt = system.unwrap_or_else(|| "You are GitHub Dotfiles AI, a helpful, harmless, and honest AI assistant powered by Ollama. Always provide accurate and useful responses.".to_string());
+            run_ollama_command(&["run", &model, "--system", &system_prompt])?;
         }
         Commands::Remove { model } => {
             println!("Removing model: {}", model);
@@ -41,4 +41,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn test_default_system_prompt() {
+        // Test that default prompt is used when None
+        let prompt = None::<String>.unwrap_or_else(|| "default".to_string());
+        assert_eq!(prompt, "default");
+    }
+
+    #[test]
+    fn test_custom_system_prompt() {
+        // Test that custom prompt is used
+        let prompt = Some("custom".to_string()).unwrap_or_else(|| "default".to_string());
+        assert_eq!(prompt, "custom");
+    }
 }

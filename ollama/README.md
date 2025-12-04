@@ -34,6 +34,8 @@ Use the provided script to automatically build and run the tool.
 
 # Run a downloaded model interactively
 ./target/release/github-dotfiles-ollama run tinyllama
+# Or with custom system prompt
+./target/release/github-dotfiles-ollama run tinyllama --system "You are a coding assistant."
 ```
 
 The script builds the tool if needed and passes arguments to it.
@@ -43,7 +45,7 @@ The script builds the tool if needed and passes arguments to it.
 - `list`: Fetches and displays available models from ollama.ai/library
 - `installed`: Lists locally installed models
 - `pull <model>`: Downloads the specified model using Ollama CLI
-- `run <model>`: Launches the model in interactive chat mode with a helpful system prompt
+- `run <model> [--system <prompt>]`: Launches the model in interactive chat mode with a system prompt (default provided)
 - `remove <model>`: Removes the specified model from local storage
 
 ## Handling Errors
