@@ -33,9 +33,9 @@ dotfiles version   # Show version
 
 **Note**: The `export PATH` command temporarily adds Dart's global executables to your PATH. Add it to your shell config file (`.zshrc`, `.bashrc`, etc.) to make it permanent.
 
-### Ollama Tool
+### Ollama
 
-Rust CLI for managing Ollama models. Run with `./bin/ollama-tool` or see [ollama-tool/README.md](./ollama-tool/README.md) for details.
+Rust CLI for managing Ollama models. Run with `./bin/ollama-tool` or see [ollama/README.md](./ollama/README.md) for details.
 
 ### Updating and Restoring Dotfiles
 

@@ -4,12 +4,12 @@ on:
   push:
     branches: [ main, add-ollama-tool ]
     paths:
-      - 'ollama-tool/**'
+      - 'ollama/**'
       - '.github/workflows/ollama-tool.yml'
   pull_request:
     branches: [ main ]
     paths:
-      - 'ollama-tool/**'
+      - 'ollama/**'
       - '.github/workflows/ollama-tool.yml'
 
 jobs:
@@ -29,4 +29,4 @@ jobs:
     - name: check
       uses: ./.github/actions/check
       with:
-        working-directory: ollama-tool
+        working-directory: ollama

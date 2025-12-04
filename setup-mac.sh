@@ -69,12 +69,12 @@ brew install opencode
 echo "Installing Ollama..."
 brew install ollama
 
-echo "Building Ollama tool..."
-cd "$SCRIPT_DIR/ollama-tool"
+echo "Building Ollama..."
+cd "$SCRIPT_DIR/ollama"
 if cargo build --release; then
-  log "Ollama tool built successfully."
+  log "Ollama built successfully."
 else
-  log "ERROR: Failed to build Ollama tool."
+  log "ERROR: Failed to build Ollama."
   exit 1
 fi
 
