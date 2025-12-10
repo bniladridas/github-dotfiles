@@ -1,13 +1,16 @@
-use std::process::Command;
+use std::process::{Command, Output};
+
+fn run_cli(args: &[&str]) -> Output {
+    Command::new("cargo")
+        .args(["run", "--"].iter().chain(args.iter()).copied())
+        .current_dir(env!("CARGO_MANIFEST_DIR"))
+        .output()
+        .unwrap_or_else(|e| panic!("Failed to run command with args {:?}: {}", args, e))
+}
 
 #[test]
 fn test_help_command() {
-    let output = Command::new("cargo")
-        .args(&["run", "--", "--help"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to run help command");
-
+    let output = run_cli(&["--help"]);
     let stdout = String::from_utf8_lossy(&output.stdout);
     assert!(output.status.success());
     assert!(stdout.contains("Commands:"));
@@ -17,12 +20,7 @@ fn test_help_command() {
 
 #[test]
 fn test_installed_command() {
-    let output = Command::new("cargo")
-        .args(&["run", "--", "installed"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to run installed command");
-
+    let output = run_cli(&["installed"]);
     // Check that the command runs without unrecognized error
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(!stderr.contains("unrecognized subcommand"));
@@ -32,12 +30,7 @@ fn test_installed_command() {
 
 #[test]
 fn test_list_command() {
-    let output = Command::new("cargo")
-        .args(&["run", "--", "list"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to run list command");
-
+    let output = run_cli(&["list"]);
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(!stderr.contains("unrecognized subcommand"));
     // May fail if no internet, but check it attempts
@@ -53,12 +46,7 @@ fn test_list_command() {
 #[test]
 fn test_pull_command() {
     // Test with invalid model to avoid downloading
-    let output = Command::new("cargo")
-        .args(&["run", "--", "pull", "invalid-model-name"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to run pull command");
-
+    let output = run_cli(&["pull", "invalid-model-name"]);
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(!stderr.contains("unrecognized subcommand"));
     // Should fail with error about model
@@ -69,12 +57,7 @@ fn test_pull_command() {
 #[test]
 fn test_run_command() {
     // Test run without model
-    let output = Command::new("cargo")
-        .args(&["run", "--", "run", "nonexistent-model"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to run run command");
-
+    let output = run_cli(&["run", "nonexistent-model"]);
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(!stderr.contains("unrecognized subcommand"));
     // Should fail
@@ -83,12 +66,7 @@ fn test_run_command() {
 
 #[test]
 fn test_remove_command() {
-    let output = Command::new("cargo")
-        .args(&["run", "--", "remove", "nonexistent-model"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to run remove command");
-
+    let output = run_cli(&["remove", "nonexistent-model"]);
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(!stderr.contains("unrecognized subcommand"));
     // May succeed or fail
@@ -97,12 +75,7 @@ fn test_remove_command() {
 #[test]
 fn test_generate_command() {
     // Test generate with minimal args
-    let output = Command::new("cargo")
-        .args(&["run", "--", "generate", "tinyllama:latest", "Hello"])
-        .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .output()
-        .expect("Failed to run generate command");
-
+    let output = run_cli(&["generate", "tinyllama:latest", "Hello"]);
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(!stderr.contains("unrecognized subcommand"));
     // May fail if model not available, but check it attempts
