@@ -31,3 +31,29 @@ pub enum Commands {
         system: Option<String>,
     },
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use clap::CommandFactory;
+
+    #[test]
+    fn test_cli_app() {
+        let mut app = Cli::command();
+        let help = app.render_help();
+        assert!(help.to_string().contains("github-dotfiles-ollama"));
+        assert!(help.to_string().contains("manage Ollama models"));
+    }
+
+    #[test]
+    fn test_parse_list() {
+        let cli = Cli::parse_from(["test", "list"]);
+        assert!(matches!(cli.command, Commands::List));
+    }
+
+    #[test]
+    fn test_parse_pull() {
+        let cli = Cli::parse_from(["test", "pull", "llama2"]);
+        assert!(matches!(cli.command, Commands::Pull { model } if model == "llama2"));
+    }
+}
