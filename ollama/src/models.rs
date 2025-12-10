@@ -33,3 +33,18 @@ pub async fn fetch_models() -> Result<Vec<String>, Error> {
     models.sort();
     Ok(models)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_selector_creation() {
+        // Test that the selector is valid
+        let selector = Selector::parse("a[href^='/library/']");
+        assert!(selector.is_ok());
+    }
+
+    // Note: fetch_models requires network, so no full unit test here
+    // In a real setup, use a mock server or library like wiremock
+}

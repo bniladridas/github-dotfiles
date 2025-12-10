@@ -119,3 +119,34 @@ async fn generate_response(model: &str, prompt: &str, system: &str) -> Result<()
     println!("{}", result.response);
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_generate_request_serialization() {
+        let request = GenerateRequest {
+            model: "test-model".to_string(),
+            prompt: "Hello".to_string(),
+            system: "You are helpful".to_string(),
+            stream: false,
+        };
+        let json = serde_json::to_string(&request).unwrap();
+        assert!(json.contains("test-model"));
+        assert!(json.contains("Hello"));
+    }
+
+    #[test]
+    fn test_generate_response_deserialization() {
+        let json = r#"{"response": "Hi there!"}"#;
+        let response: GenerateResponse = serde_json::from_str(json).unwrap();
+        assert_eq!(response.response, "Hi there!");
+    }
+
+    #[test]
+    fn test_error_display() {
+        let error = Error::Command("test error".to_string());
+        assert!(error.to_string().contains("test error"));
+    }
+}
