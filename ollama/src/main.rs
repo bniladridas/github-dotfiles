@@ -16,7 +16,6 @@ use models::fetch_models;
 use ollama::run_ollama_command;
 use prompts::DEFAULT_SYSTEM_PROMPT;
 
-
 /// Main entry point for the Ollama CLI tool.
 ///
 /// Parses command-line arguments and executes the corresponding subcommand.
@@ -67,8 +66,6 @@ async fn main() -> Result<(), Error> {
     }
     Ok(())
 }
-
-
 
 #[cfg(test)]
 mod tests {
