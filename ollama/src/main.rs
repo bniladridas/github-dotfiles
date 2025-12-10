@@ -80,8 +80,8 @@ mod tests {
             stream: false,
         };
         let json = serde_json::to_string(&request).unwrap();
-        assert!(json.contains("test-model"));
-        assert!(json.contains("Hello"));
+        assert!(json.contains(r#""model":"test-model""#));
+        assert!(json.contains(r#""prompt":"Hello""#));
     }
 
     #[test]
