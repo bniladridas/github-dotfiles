@@ -48,18 +48,12 @@ mod tests {
     #[test]
     fn test_parse_list() {
         let cli = Cli::parse_from(["test", "list"]);
-        match cli.command {
-            Commands::List => {}
-            _ => panic!("Expected List"),
-        }
+        assert!(matches!(cli.command, Commands::List));
     }
 
     #[test]
     fn test_parse_pull() {
         let cli = Cli::parse_from(["test", "pull", "llama2"]);
-        match cli.command {
-            Commands::Pull { model } => assert_eq!(model, "llama2"),
-            _ => panic!("Expected Pull"),
-        }
+        assert!(matches!(cli.command, Commands::Pull { model } if model == "llama2"));
     }
 }
