@@ -7,7 +7,9 @@
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-const OLLAMA_API_BASE: &str = "http://localhost:11434";
+fn get_ollama_api_base() -> String {
+    std::env::var("OLLAMA_API_BASE").unwrap_or_else(|_| "http://localhost:11434".to_string())
+}
 
 /// Request payload for Ollama generate API.
 #[derive(Serialize)]
@@ -67,7 +69,7 @@ pub async fn generate_response(model: &str, prompt: &str, system: &str) -> Resul
     };
 
     let response = client
-        .post(format!("{}/api/generate", OLLAMA_API_BASE))
+        .post(format!("{}/api/generate", get_ollama_api_base()))
         .json(&request)
         .send()
         .await?;
