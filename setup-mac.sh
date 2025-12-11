@@ -95,7 +95,41 @@ else
 fi
 
 echo "Installing Ruby..."
-brew install ruby
+read -r -p "Choose Ruby installation method (1 for direct brew install, 2 for rbenv): " ruby_choice
+case "$ruby_choice" in
+  2)
+    log "Installing rbenv..."
+    if ! brew install rbenv; then
+      log "ERROR: Failed to install rbenv."
+      exit 1
+    fi
+    # Add rbenv to zsh for future sessions
+    # shellcheck disable=SC2016
+    echo 'eval "$(rbenv init -)"' >> ~/.zshrc
+    # Initialize rbenv for the current script session
+    eval "$(rbenv init -)"
+
+    log "Installing Ruby 3.2.2 with rbenv (this may take a while)..."
+    if rbenv install 3.2.2; then
+      rbenv global 3.2.2
+      log "Ruby 3.2.2 installed and set as global via rbenv."
+    else
+      log "ERROR: Failed to install Ruby 3.2.2 with rbenv."
+      exit 1
+    fi
+    ;;
+  *)
+    if [ "$ruby_choice" != "1" ]; then
+      echo "Invalid choice, installing Ruby directly."
+    fi
+    if brew install ruby; then
+      log "Ruby installed directly via Homebrew."
+    else
+      log "ERROR: Failed to install Ruby."
+      exit 1
+    fi
+    ;;
+esac
 
 echo "Installing Cocoapods..."
 brew install cocoapods
