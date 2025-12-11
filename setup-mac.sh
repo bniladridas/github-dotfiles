@@ -100,6 +100,7 @@ if [ "$ruby_choice" = "1" ]; then
   brew install ruby
 elif [ "$ruby_choice" = "2" ]; then
   brew install rbenv
+  # shellcheck disable=SC2016
   echo 'eval "$(rbenv init -)"' >> ~/.zshrc
   export PATH="/opt/homebrew/bin:$PATH"
   rbenv global 3.2.2
