@@ -95,7 +95,18 @@ else
 fi
 
 echo "Installing Ruby..."
-brew install ruby
+read -r -p "Choose Ruby installation method (1 for direct brew install, 2 for rbenv): " ruby_choice
+if [ "$ruby_choice" = "1" ]; then
+  brew install ruby
+elif [ "$ruby_choice" = "2" ]; then
+  brew install rbenv
+  echo 'eval "$(rbenv init -)"' >> ~/.zshrc
+  export PATH="/opt/homebrew/bin:$PATH"
+  rbenv global 3.2.2
+else
+  echo "Invalid choice, installing Ruby directly."
+  brew install ruby
+fi
 
 echo "Installing Cocoapods..."
 brew install cocoapods
