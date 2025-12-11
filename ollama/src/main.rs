@@ -11,43 +11,10 @@ mod prompts;
 
 use clap::Parser;
 use cli::{Cli, Commands};
+use github_dotfiles_ollama::{generate_response, Error};
 use models::fetch_models;
 use ollama::run_ollama_command;
 use prompts::DEFAULT_SYSTEM_PROMPT;
-use serde::{Deserialize, Serialize};
-use thiserror::Error;
-
-const OLLAMA_API_BASE: &str = "http://localhost:11434";
-
-#[derive(Serialize)]
-struct GenerateRequest {
-    model: String,
-    prompt: String,
-    system: String,
-    stream: bool,
-}
-
-#[derive(Deserialize)]
-struct GenerateResponse {
-    response: String,
-}
-
-/// Represents errors that can occur within the application.
-#[derive(Debug, Error)]
-pub enum Error {
-    /// An error from the `reqwest` crate during an HTTP request.
-    #[error("HTTP request failed: {0}")]
-    Reqwest(#[from] reqwest::Error),
-    /// An I/O error occurred.
-    #[error("IO error: {0}")]
-    Io(#[from] std::io::Error),
-    /// An error occurred during JSON serialization or deserialization.
-    #[error("JSON parsing error: {0}")]
-    Serde(#[from] serde_json::Error),
-    /// An external `ollama` command returned a non-zero exit status.
-    #[error("Ollama command failed: {0}")]
-    Command(String),
-}
 
 /// Main entry point for the Ollama CLI tool.
 ///
@@ -100,22 +67,33 @@ async fn main() -> Result<(), Error> {
     Ok(())
 }
 
-async fn generate_response(model: &str, prompt: &str, system: &str) -> Result<(), Error> {
-    let client = reqwest::Client::new();
-    let request = GenerateRequest {
-        model: model.to_string(),
-        prompt: prompt.to_string(),
-        system: system.to_string(),
-        stream: false,
-    };
+#[cfg(test)]
+mod tests {
+    use github_dotfiles_ollama::*;
 
-    let response = client
-        .post(format!("{}/api/generate", OLLAMA_API_BASE))
-        .json(&request)
-        .send()
-        .await?;
+    #[test]
+    fn test_generate_request_serialization() {
+        let request = GenerateRequest {
+            model: "test-model".to_string(),
+            prompt: "Hello".to_string(),
+            system: "You are helpful".to_string(),
+            stream: false,
+        };
+        let json = serde_json::to_string(&request).unwrap();
+        assert!(json.contains(r#""model":"test-model""#));
+        assert!(json.contains(r#""prompt":"Hello""#));
+    }
 
-    let result: GenerateResponse = response.json().await?;
-    println!("{}", result.response);
-    Ok(())
+    #[test]
+    fn test_generate_response_deserialization() {
+        let json = r#"{"response": "Hi there!"}"#;
+        let response: GenerateResponse = serde_json::from_str(json).unwrap();
+        assert_eq!(response.response, "Hi there!");
+    }
+
+    #[test]
+    fn test_error_display() {
+        let error = Error::Command("test error".to_string());
+        assert!(error.to_string().contains("test error"));
+    }
 }
