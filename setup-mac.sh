@@ -215,14 +215,15 @@ echo "Installing QEMU..."
 brew install qemu
 
 echo "Setting up Docker Hub..."
-read -r -p "Do you want to log in to Docker Hub as 'harpertoken'? (y/N): " login_choice
+read -r -p "Do you want to log in to Docker Hub? (y/N): " login_choice
 if [[ "$login_choice" =~ ^[Yy]$ ]]; then
+  read -r -p "Enter Docker Hub username: " docker_username
   read -r -p "Enter Docker Hub token: " docker_token
-  if [ -n "$docker_token" ]; then
-    echo "$docker_token" | docker login -u harpertoken --password-stdin
-    echo "Logged in to Docker Hub as harpertoken."
+  if [ -n "$docker_username" ] && [ -n "$docker_token" ]; then
+    echo "$docker_token" | docker login -u "$docker_username" --password-stdin
+    echo "Logged in to Docker Hub as $docker_username."
   else
-    echo "No token provided, skipped."
+    echo "Username or token not provided, skipped."
   fi
 else
   echo "Skipped Docker Hub login."
