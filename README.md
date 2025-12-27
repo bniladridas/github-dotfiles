@@ -33,6 +33,31 @@ dotfiles version   # Show version
 
 **Note**: The `export PATH` command temporarily adds Dart's global executables to your PATH. Add it to your shell config file (`.zshrc`, `.bashrc`, etc.) to make it permanent.
 
+### Mole
+
+Deep clean and optimize your Mac with mole, a unified toolkit for cleaning caches, uninstalling apps, and system optimization.
+
+```bash
+mo                           # Interactive menu
+mo clean                     # Deep cleanup
+mo uninstall                 # Remove apps + leftovers
+mo optimize                  # Refresh caches & services
+mo analyze                   # Visual disk explorer
+mo status                    # Live system health dashboard
+mo purge                     # Clean project build artifacts
+
+mo touchid                   # Configure Touch ID for sudo
+mo update                    # Update Mole
+mo remove                    # Remove Mole from system
+mo --help                    # Show help
+mo --version                 # Show installed version
+
+mo clean --dry-run           # Preview the cleanup plan
+mo clean --whitelist         # Manage protected caches
+mo uninstall --force-rescan  # Rescan applications and refresh cache
+mo optimize --whitelist      # Manage protected optimization rules
+```
+
 ### Ollama
 
 Rust CLI for managing Ollama models. Run with `./bin/ollama-tool` or see [ollama/README.md](./ollama/README.md) for details.
@@ -50,7 +75,7 @@ This script pulls the latest changes and copies `.gitconfig`, `.pre-commit-confi
 
 ### Initial Mac Setup
 
-For a new Mac, run the setup script to install actionlint, Cocoapods, Docker CLI, Flutter, GitHub CLI, GitLab CLI, Go, Homebrew, LLVM, Node.js, Ollama, opencode, Python, QEMU, Ruby, Rust, yamllint, Zsh, and configure Git hooks globally. It also offers to log in to Docker Hub as 'harpertoken':
+For a new Mac, run the setup script to install actionlint, Cocoapods, Docker CLI, Flutter, GitHub CLI, GitLab CLI, Go, Homebrew, LLVM, mole, Node.js, Ollama, opencode, Python, QEMU, Ruby, Rust, yamllint, Zsh, and configure Git hooks globally. It also offers to log in to Docker Hub as 'harpertoken':
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bniladridas/github-dotfiles/main/setup-mac.sh)"

@@ -175,6 +175,14 @@ brew install actionlint
 echo "Installing yamllint..."
 brew install yamllint
 
+echo "Installing mole..."
+if brew install tw93/tap/mole; then
+  log "Mole installed successfully."
+else
+  log "ERROR: Failed to install mole."
+  exit 1
+fi
+
 log "Installing Flutter..."
 if brew install flutter; then
   log "Flutter installed."
