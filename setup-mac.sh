@@ -154,6 +154,14 @@ fi
 echo "Installing GitLab CLI..."
 brew install glab
 
+log "Installing GitLab Runner..."
+if brew install gitlab-runner; then
+  log "GitLab Runner installed successfully."
+else
+  log "ERROR: Failed to install GitLab Runner."
+  exit 1
+fi
+
 echo "Installing pipx..."
 brew install pipx
 
