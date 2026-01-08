@@ -162,7 +162,7 @@ else
   exit 1
 fi
 
-echo "Installing Graphite..."
+log "Installing Graphite..."
 if brew install withgraphite/tap/graphite; then
   log "Graphite installed successfully."
 else
