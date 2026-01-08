@@ -162,6 +162,14 @@ else
   exit 1
 fi
 
+echo "Installing Graphite..."
+if brew install withgraphite/tap/graphite; then
+  log "Graphite installed successfully."
+else
+  log "ERROR: Failed to install Graphite."
+  exit 1
+fi
+
 echo "Installing pipx..."
 brew install pipx
 
