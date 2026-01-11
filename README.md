@@ -79,7 +79,7 @@ gt stack                                 # View current stack structure
 gt repo sync                             # Sync all branches in repo
 ```
 
-For advanced usage, see [Graphite docs](https://graphite.dev/docs).
+For PR reviews, visit https://app.graphite.com. For advanced usage, see [Graphite docs](https://graphite.dev/docs).
 
 ### Updating and Restoring Dotfiles
 
