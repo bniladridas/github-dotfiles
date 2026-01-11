@@ -154,13 +154,13 @@ The setup script automatically configures Git to use the hooks globally and make
 
 ## Features
 
-- **Code quality assurance**: Pre-commit hooks enforce linting, formatting, and testing across Python, Rust, C++, Bash, YAML, Docker, GitHub Actions, and Dart.
+- **Code quality assurance**: Pre-commit hooks enforce linting, formatting, and testing across `Python`, `Rust`, `C++`, `Bash`, `YAML`, `Docker`, `GitHub Actions`, and `Dart`.
 - **Commit standards**: Validates conventional commit messages and author identity for consistent history.
-- **Security scanning**: Automated CodeQL and Trivy checks safeguard against vulnerabilities on every push and PR.
-- **AI model management**: Rust-based Ollama tool for seamless model fetching, downloading, and execution.
-- **Git workflow enhancement**: Graphite enables efficient stacked pull requests for parallel development and faster reviews.
-- **Automated testing**: Comprehensive Dart CLI unit tests run in CI for reliability.
-- **Version automation**: Dart-powered bot handles semantic versioning and release workflows via GitHub Actions.
+- **Security scanning**: Automated `CodeQL` and `Trivy` checks safeguard against vulnerabilities on every push and PR.
+- **AI model management**: `Rust`-based `Ollama` tool for seamless model fetching, downloading, and execution.
+- **Git workflow enhancement**: `Graphite` enables efficient stacked pull requests for parallel development and faster reviews.
+- **Automated testing**: Comprehensive `Dart` CLI unit tests run in CI for reliability.
+- **Version automation**: `Dart`-powered bot handles semantic versioning and release workflows via `GitHub Actions`.
 
 ## Handling errors
 
