@@ -62,6 +62,25 @@ mo optimize --whitelist      # Manage protected optimization rules
 
 Rust CLI for managing Ollama models. Run with `./bin/ollama-tool` or see [ollama/README.md](./ollama/README.md) for details.
 
+### Graphite
+
+Graphite revolutionizes Git workflows with stacked pull requests, enabling faster reviews and parallel development by breaking large changes into manageable, interdependent PRs.
+
+Key commands:
+
+```bash
+gt branch create "feature-name"          # Create a stacked branch
+gt create --all --message "feat: add X"  # Stage and commit all changes
+gt submit --stack --reviewers alice,bob  # Submit entire stack with reviewers
+gt sync --restack                        # Sync and restack branches
+gt up 2                                  # Navigate up 2 branches in stack
+gt down                                  # Move down the stack
+gt stack                                 # View current stack structure
+gt repo sync                             # Sync all branches in repo
+```
+
+For advanced usage, see [Graphite docs](https://graphite.dev/docs).
+
 ### Updating and Restoring Dotfiles
 
 To update the repository and restore the latest dotfiles to your home directory:
