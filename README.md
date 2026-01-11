@@ -69,9 +69,9 @@ Graphite revolutionizes Git workflows with stacked pull requests, enabling faste
 Key commands:
 
 ```bash
-gt branch create "feature-name"          # Create a stacked branch
-gt create --all --message "feat: add X"  # Stage and commit all changes
-gt submit --stack --reviewers alice,bob  # Submit entire stack with reviewers
+gt branch create <feature-name>              # Create a stacked branch
+gt create --all --message "feat: <summary>"  # Stage and commit all changes
+gt submit --stack --reviewers <user1>,<user2>  # Submit entire stack with reviewers
 gt sync --restack                        # Sync and restack branches
 gt up 2                                  # Navigate up 2 branches in stack
 gt down                                  # Move down the stack
