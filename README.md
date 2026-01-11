@@ -154,15 +154,13 @@ The setup script automatically configures Git to use the hooks globally and make
 
 ## Features
 
-- **Pre-commit checks**: Runs pre-commit hooks on push (includes Python linting with black/flake8/mypy/bandit/safety, C++ formatting/linting with clang-format and clang-tidy, Rust formatting/linting/compilation with rustfmt/clippy, Bash linting with shellcheck, Dockerfile linting with hadolint, YAML linting with yamllint, GitHub Actions linting with actionlint, Dart linting and testing, and general checks).
-- **YAML linting**: Runs check-yaml from pre-commit.
-- **Commit message validation**: Commit-msg hook ensures messages start with conventional type and are lowercase ≤60 chars. Pre-push hook enforces stricter format with scope, ≤40 chars.
-- **Author identity verification**: Checks that commits are authored by "Niladri Das" with email "bniladridas@users.noreply.github.com".
-- **Automated vulnerability scanning**: CodeQL and Trivy bots scan every push and PR for security issues, ensuring robust protection.
-- **Ollama model management**: Rust tool for fetching, downloading, and running Ollama models from the internet.
-- **Testing**: Comprehensive unit tests for the Dart CLI, run automatically in CI.
-- **Version management**: Dart-powered version bump bot automates semantic versioning updates for the package.
-- **Automation workflows**: GitHub Actions for automated version bumps via PRs and release creation. See [automation documentation](./.github/workflows/automation/README.md).
+- **Code quality assurance**: Pre-commit hooks enforce linting, formatting, and testing across Python, Rust, C++, Bash, YAML, Docker, GitHub Actions, and Dart.
+- **Commit standards**: Validates conventional commit messages and author identity for consistent history.
+- **Security scanning**: Automated CodeQL and Trivy checks safeguard against vulnerabilities on every push and PR.
+- **AI model management**: Rust-based Ollama tool for seamless model fetching, downloading, and execution.
+- **Git workflow enhancement**: Graphite enables efficient stacked pull requests for parallel development and faster reviews.
+- **Automated testing**: Comprehensive Dart CLI unit tests run in CI for reliability.
+- **Version automation**: Dart-powered bot handles semantic versioning and release workflows via GitHub Actions.
 
 ## Handling errors
 
