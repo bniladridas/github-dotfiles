@@ -3,7 +3,7 @@
 # Safe Homebrew cleanup script
 # Removes old versions and unused dependencies
 
-set -e
+set -euo pipefail
 
 echo "Cleaning up Homebrew..."
 
