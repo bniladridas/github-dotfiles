@@ -3,7 +3,7 @@
 # Safe Homebrew update script
 # Updates Homebrew formulae and upgrades installed packages
 
-set -e
+set -euo pipefail
 
 echo "Updating Homebrew..."
 brew update
