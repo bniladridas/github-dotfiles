@@ -9,7 +9,7 @@
 # Reference: Homebrew's philosophy emphasizes simplicity and safety, aligning with this minimal approach to avoid overwhelming new users.
 # This prevents "bandwidth noise" by providing a focused, educational example rather than a bloated installation.
 
-set -e
+set -euo pipefail
 
 echo "Installing minimal essential tool: Git"
 brew install git
