@@ -3,7 +3,7 @@
 # Safe Homebrew install script for common development tools
 # Installs frequently used packages for development
 
-set -e
+set -euo pipefail
 
 echo "Installing common development tools via Homebrew..."
 
