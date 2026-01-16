@@ -3,7 +3,7 @@
 # Safe Homebrew install script for common utilities
 # Installs useful command-line utilities
 
-set -e
+set -euo pipefail
 
 echo "Installing common utilities via Homebrew..."
 
