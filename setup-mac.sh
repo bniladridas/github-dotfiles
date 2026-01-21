@@ -66,6 +66,14 @@ fi
 echo "Installing opencode..."
 brew install opencode
 
+echo "Installing Kiro CLI..."
+if curl -fsSL https://cli.kiro.dev/install | bash; then
+  log "Kiro CLI installed successfully."
+else
+  log "ERROR: Failed to install Kiro CLI."
+  exit 1
+fi
+
 echo "Installing Ollama..."
 brew install ollama
 
