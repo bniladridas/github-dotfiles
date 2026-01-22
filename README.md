@@ -33,10 +33,10 @@ cd ~/github-dotfiles
 
 ### Authentication
 
-Login to access premium features and sync configurations:
+Login with your GitHub account to access premium features:
 
 ```bash
-# Login with token or browser
+# Login with GitHub OAuth
 ./auth/login.sh login
 
 # Check login status  
