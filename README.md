@@ -46,6 +46,19 @@ Login with your GitHub account to access premium features:
 ./auth/login.sh logout
 ```
 
+### Sync & Premium Features (Requires Login)
+
+After logging in, access advanced features:
+
+```bash
+# Sync dotfiles across machines
+./sync/dotfiles-sync.sh push    # Backup to GitHub
+./sync/dotfiles-sync.sh pull    # Restore from GitHub
+
+# Premium tools
+./sync/dotfiles-sync.sh premium # Show available features
+```
+
 ### Dart CLI Tool
 
 Install Dart SDK, then use the CLI tool for managing dotfiles:
