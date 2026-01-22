@@ -46,7 +46,17 @@ sync_push() {
   git add .
   git commit -m "sync: backup dotfiles $(date)"
   git remote add origin "https://github.com/$USERNAME/$SYNC_REPO.git"
-  git push -u origin main --force
+
+  echo "⚠️  WARNING: This will overwrite the remote sync repository."
+  echo "Continue? (y/N): "
+  read -r confirm
+  if [[ "$confirm" =~ ^[Yy]$ ]]; then
+    git push --force-with-lease -u origin main 2>/dev/null || git push -u origin main --force
+  else
+    log "Sync cancelled by user"
+    rm -rf "$BACKUP_DIR"
+    exit 1
+  fi
 
   log "Dotfiles synced to github.com/$USERNAME/$SYNC_REPO"
   rm -rf "$BACKUP_DIR"
@@ -94,7 +104,15 @@ premium_tools() {
   echo "  ✓ Automated backup scheduling"
   echo "  ✓ Cross-platform sync"
   echo ""
-  echo "Run 'dotfiles premium enable' to activate"
+  echo "Note: Premium features are currently in development"
+}
+
+premium_enable() {
+  check_auth
+
+  log "Premium features are currently in development."
+  log "Available now: sync push/pull functionality"
+  log "Coming soon: Advanced linting, team sharing, automated backups"
 }
 
 case "$1" in
@@ -105,13 +123,18 @@ case "$1" in
     sync_pull
     ;;
   premium)
-    premium_tools
+    if [ "$2" = "enable" ]; then
+      premium_enable
+    else
+      premium_tools
+    fi
     ;;
   *)
-    echo "Usage: $0 {push|pull|premium}"
-    echo "  push     - Backup dotfiles to GitHub"
-    echo "  pull     - Restore dotfiles from GitHub"
-    echo "  premium  - Show premium features"
+    echo "Usage: $0 {push|pull|premium [enable]}"
+    echo "  push           - Backup dotfiles to GitHub"
+    echo "  pull           - Restore dotfiles from GitHub"
+    echo "  premium        - Show premium features"
+    echo "  premium enable - Enable premium features"
     echo ""
     echo "Note: Requires authentication (./auth/login.sh login)"
     exit 1
