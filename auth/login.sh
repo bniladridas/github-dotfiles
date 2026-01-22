@@ -33,8 +33,8 @@ github_login() {
     # Validate token with GitHub API
     USER_INFO=$(curl -s -H "Authorization: token $token" https://api.github.com/user)
 
-    if echo "$USER_INFO" | grep -q '"login"'; then
-      USERNAME=$(echo "$USER_INFO" | grep '"login"' | cut -d'"' -f4)
+      USERNAME=$(echo "$USER_INFO" | jq -r '.login')
+      if [ -n "$USERNAME" ]; then
       echo "$token" > "$TOKEN_FILE"
       echo "$USERNAME" > "$USER_FILE"
       chmod 600 "$TOKEN_FILE" "$USER_FILE"
