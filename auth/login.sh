@@ -10,6 +10,12 @@ log() {
 }
 
 github_login() {
+  # Check for required dependencies
+  if ! command -v jq &> /dev/null; then
+    log "ERROR: jq is required but not installed"
+    exit 1
+  fi
+
   mkdir -p "$AUTH_DIR"
 
   log "Opening GitHub OAuth login..."
