@@ -4,10 +4,29 @@ This repository provides a comprehensive toolkit for developers, including globa
 
 ## Installation
 
-Clone this repository to your home directory:
+Choose your preferred installation method:
 
+### Option 1: Direct Bash (Recommended)
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bniladridas/github-dotfiles/main/setup-mac.sh)"
+```
+
+### Option 2: Homebrew
+```bash
+brew tap bniladridas/dotfiles https://github.com/bniladridas/github-dotfiles
+brew install dotfiles
+```
+
+### Option 3: UV (Python Package Manager)
+```bash
+uv tool install git+https://github.com/bniladridas/github-dotfiles.git
+```
+
+### Option 4: Manual Clone
 ```bash
 git clone https://github.com/bniladridas/github-dotfiles.git ~/github-dotfiles
+cd ~/github-dotfiles
+./setup-mac.sh
 ```
 
 ## Usage

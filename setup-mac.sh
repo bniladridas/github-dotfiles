@@ -16,8 +16,15 @@ log() {
 }
 
 echo "Setting up Zsh prompt..."
-touch ~/.zshrc
-echo 'PS1="$ "' >> ~/.zshrc
+if [ ! -f ~/.zshrc ]; then
+  touch ~/.zshrc
+fi
+
+# Only add PS1 if it doesn't already exist
+if ! grep -q 'PS1=' ~/.zshrc; then
+  echo 'PS1="$ "' >> ~/.zshrc
+fi
+
 # shellcheck disable=SC1090
 source ~/.zshrc
 
