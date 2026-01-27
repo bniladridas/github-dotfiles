@@ -248,6 +248,14 @@ brew install docker
 echo "Installing QEMU..."
 brew install qemu
 
+echo "Installing Brev..."
+if brew install brevdev/homebrew-brev/brev; then
+  log "Brev installed successfully."
+else
+  log "ERROR: Failed to install Brev."
+  exit 1
+fi
+
 echo "Setting up Docker Hub..."
 read -r -p "Do you want to log in to Docker Hub? (y/N): " login_choice
 if [[ "$login_choice" =~ ^[Yy]$ ]]; then
