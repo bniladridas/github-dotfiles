@@ -19,11 +19,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Delete branch (skip if already deleted)
+
         run: |
-          gh api \
+          response=$(gh api \
             -X DELETE \
             "repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME" \
-          || echo "branch already deleted, skipping"
+            2>&1) || {
+            if echo "$response" | grep -q "Reference does not exist"; then
+              echo "Branch already deleted, skipping"
+            else
+              echo "Failed to delete branch: $response"
+              exit 1
+            fi
+          }
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
