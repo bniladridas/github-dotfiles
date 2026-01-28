@@ -22,7 +22,8 @@ jobs:
         run: |
           gh api \
             -X DELETE \
-            repos/${{ github.repository }}/git/refs/heads/${{ github.event.pull_request.head.ref }} \
+            "repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME" \
           || echo "branch already deleted, skipping"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
