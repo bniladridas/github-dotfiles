@@ -4,66 +4,58 @@ This repository provides a comprehensive toolkit for developers, including globa
 
 ## Stacked Development Workflow
 
-This repository provides a **complete stacked development workflow** using Sapling, Graphite, and ReviewStack. Here's how to use them together:
+This repository includes tools for stacked development using Sapling, Graphite, and ReviewStack.
 
-### Complete Workflow Example
+### Workflow Example
 
 ```bash
-# 1. Setup (one-time)
-./sapling-setup.sh                    # Install Sapling
-# Install Graphite: npm install -g @withgraphite/graphite-cli
+# Setup (one-time)
+./sapling-setup.sh
+npm install -g @withgraphite/graphite-cli
 
-# 2. Start a new feature stack
+# Create stack
 sl clone https://github.com/owner/repo.git
 cd repo
 sl goto main
 
-# 3. Create your stack locally with Sapling
 sl commit -m "feat: add database schema"
 sl commit -m "feat: add API endpoints"
 sl commit -m "feat: add frontend components"
-sl commit -m "test: add integration tests"
 
-# 4. View your stack
+# View stack
 sl ssl                                # Show smartlog
 sl web                                # Launch browser UI
 
-# 5. Submit stack as GitHub PRs with Graphite
-gt auth                               # Login to GitHub
-gt repo init                          # Initialize Graphite
-gt submit --stack --reviewers user1,user2
+# Submit as PRs
+gt auth
+gt repo init
+gt submit --stack
 
-# 6. Review PRs with ReviewStack
-./bin/reviewstack --current           # Open current PR in ReviewStack
-# Or convert any GitHub PR URL:
+# Review
+./bin/reviewstack --current
 ./bin/reviewstack https://github.com/owner/repo/pull/123
 
-# 7. Make changes based on feedback
-sl goto <commit-hash>                 # Navigate to specific commit
-sl amend                              # Modify the commit
-sl absorb                             # Auto-absorb working changes
+# Update
+sl goto <commit-hash>
+sl amend
+gt sync --restack
 
-# 8. Update PRs
-gt sync --restack                     # Sync and update all PRs
-
-# 9. Navigate your stack
-sl next 2                             # Move up 2 commits
-sl prev                               # Move down 1 commit
-gt up                                 # Graphite navigation
-gt down                               # Graphite navigation
+# Navigate
+sl next 2 / sl prev
+gt up / gt down
 ```
 
-### Key Benefits
+### Tools
 
-- **Sapling**: Superior local stack management, no staging area, built-in undo
-- **Graphite**: Seamless GitHub PR creation and management for stacks
-- **ReviewStack**: Stack-aware code review with side-by-side diff/timeline
+- **Sapling**: Local stack management, no staging area
+- **Graphite**: GitHub PR creation for stacks
+- **ReviewStack**: Stack-aware code review
 
-### Keyboard Shortcuts (ReviewStack)
+### ReviewStack Shortcuts
 
-- `Shift + N/P` - Navigate stack PRs
-- `Ctrl + .` - Toggle timeline view
-- `Alt + A/R/C` - Approve/Request changes/Comment
+- `Shift + N/P` - Navigate PRs
+- `Ctrl + .` - Toggle timeline
+- `Alt + A/R/C` - Approve/Request/Comment
 
 ## Installation
 
