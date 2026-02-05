@@ -131,6 +131,14 @@ else
   exit 1
 fi
 
+log "Installing Kimi CLI..."
+if curl -LsSf https://code.kimi.com/install.sh | bash; then
+  log "Kimi CLI installed successfully."
+else
+  log "ERROR: Failed to install Kimi CLI."
+  exit 1
+fi
+
 echo "Installing Ruby..."
 read -r -p "Choose Ruby installation method (1 for direct brew install, 2 for rbenv): " ruby_choice
 case "$ruby_choice" in

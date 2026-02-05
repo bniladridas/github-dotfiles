@@ -227,7 +227,7 @@ This script pulls the latest changes and copies `.gitconfig`, `.pre-commit-confi
 
 ### Initial Mac Setup
 
-For a new Mac, run the setup script to install actionlint, Brev, Cocoapods, codex, Docker CLI, Flutter, GitHub CLI, GitLab CLI, Go, Homebrew, Kiro CLI, LLVM, mole, Node.js, Ollama, opencode, Python, QEMU, Ruby, Rust, yamllint, Zsh, and configure Git hooks globally. It also offers to log in to Docker Hub:
+For a new Mac, run the setup script to install actionlint, Brev, Cocoapods, codex, Docker CLI, Flutter, GitHub CLI, GitLab CLI, Go, Homebrew, KiloCode CLI, Kimi CLI, Kiro CLI, LLVM, mole, Node.js, Ollama, opencode, Python, QEMU, Ruby, Rust, yamllint, Zsh, and configure Git hooks globally. It also offers to log in to Docker Hub:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bniladridas/github-dotfiles/main/setup-mac.sh)"
